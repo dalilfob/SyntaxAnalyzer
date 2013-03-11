@@ -1,4 +1,35 @@
+import java.util.*;
+import java.io.*;
 import java_cup.runtime.*;
+
+/* Parser Code */
+
+parser code 
+    {:
+        private Yylex lexer;
+        private File file;
+
+        public parser(File file) {
+            this();
+            this.file = file;
+            try {
+                lexer = new YYlex(new FileReader(file));
+            } 
+            catch(IOException e) {
+                System.out.println("Unable to open file " + file);
+            }
+        }
+    :};
+
+
+/* Scan with */
+
+scan with
+    {:
+        return lexer.yylex();
+    :};
+
+
 
 /* Terminal Tokens */
 
@@ -27,8 +58,10 @@ precedence nonassoc t_less, t_lessequal, t_greater, t_greaterequal;
 precedence right t_notequal, t_assignop, t_equal;
 precedence left t_plus, t_minus, t_multiplication, t_division, t_mod;
 
-/* Grammar */
+/* Start */
+start with Prog;
 
+/* Grammar */
 Prog ::= A
      ;
 
