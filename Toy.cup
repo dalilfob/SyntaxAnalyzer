@@ -51,7 +51,7 @@ non terminal Extends, Implements, IDs, FieldStar, Field;
 non terminal InterfaceDecl, ProtoStar, Prototype, StmtBlock;
 non terminal VariableStar, StmtStar, Stmt, IfStmt, WhileStmt;
 non terminal ForStmt, BreakStmt, ReturnStmt, PrintStmt, ExprPlus;
-non terminal Expr, Lvalue, Call, Actuals, Constant;
+non terminal Expr, Lvalue, Call, Actuals, Constant, ExprQ;
 
 /* Precedence */
 precedence nonassoc t_less, t_lessequal, t_greater, t_greaterequal;
@@ -99,6 +99,7 @@ Formals ::= Formals t_comma Variable
         ;
 
 ClassDecl ::= t_class t_id Extends Implements t_leftbrace FieldStar t_rightbrace
+          ;
 
 Extends ::= t_extends t_id
         |
@@ -108,7 +109,7 @@ Implements ::= t_implements IDs
            ;
 
 
-IDs ::= ID t_comma t_id;
+IDs ::= IDs t_comma t_id
     | t_id
     ;
 
@@ -134,6 +135,7 @@ Prototype ::= Type t_id t_leftparen Formals t_rightparen t_semicolon
           ;
 
 StmtBlock ::= t_leftbrace VariableStar StmtStar t_rightbrace
+          ;
 
 VariableStar ::= VariableStar VariableDecl
              |
@@ -154,6 +156,9 @@ Stmt ::= ExprQ t_semicolon
      | StmtBlock
      ;
 
+ExprQ ::= Expr
+      |
+      ;
 
 IfStmt ::= t_if t_leftparen Expr t_rightparen Stmt
        | t_if t_leftparen Expr t_rightparen Stmt t_else Stmt
@@ -195,6 +200,9 @@ Expr ::= Lvalue t_assignop Expr
      | Expr t_greater Expr
      | Expr t_equal Expr
      | Expr t_notequal Expr
+     | Expr t_greaterequal Expr
+     | Expr t_mod Expr
+     | Expr t_lessequal Expr
      | t_readln t_leftparen t_rightparen
      | t_newarray t_leftparen t_intconstant t_comma Type t_rightparen
      ;
