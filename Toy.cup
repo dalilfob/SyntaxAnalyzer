@@ -24,8 +24,8 @@ non terminal Expr, Lvalue, Call, Actuals, Constant;
 
 /* Precedence */
 precedence nonassoc t_less, t_lessequal, t_greater, t_greaterequal;
-precedence right t_notequal, t_assignop, t_equal
-precedence left t_plus, t_minus, t_multiplication, t_division
+precedence right t_notequal, t_assignop, t_equal;
+precedence left t_plus, t_minus, t_multiplication, t_division, t_mod;
 
 /* Grammar */
 
