@@ -1,8 +1,12 @@
-SyntaxAnalyzer
-==============
+#Syntax Analyzer
 
 Toy Language Syntax Analyzer (CUP/YACC) 
 
+#CUP Compile
+
+```
+javac -jar java-cup-11a.jar -expect 50 -nonterms toy.cup
+```
 
 ## Resources
 
