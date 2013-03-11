@@ -1,0 +1,87 @@
+/** CUP generated class containing symbol constants. */
+public class sym {
+  /* terminals */
+  public static final int t_for = 8;
+  public static final int t_boolconstant = 41;
+  public static final int t_void = 18;
+  public static final int t_extends = 7;
+  public static final int t_doubleconstant = 43;
+  public static final int t_assignop = 31;
+  public static final int t_return = 16;
+  public static final int t_intconstant = 42;
+  public static final int t_interface = 12;
+  public static final int t_else = 6;
+  public static final int t_implements = 10;
+  public static final int t_if = 9;
+  public static final int t_leftparen = 35;
+  public static final int t_id = 45;
+  public static final int t_semicolon = 32;
+  public static final int t_readln = 15;
+  public static final int t_lessequal = 26;
+  public static final int t_mod = 24;
+  public static final int t_stringconstant = 44;
+  public static final int t_greaterequal = 28;
+  public static final int t_rightparen = 36;
+  public static final int t_minus = 21;
+  public static final int t_division = 23;
+  public static final int EOF = 0;
+  public static final int t_greater = 27;
+  public static final int error = 1;
+  public static final int t_string = 17;
+  public static final int t_println = 14;
+  public static final int t_comma = 33;
+  public static final int t_class = 4;
+  public static final int t_notequal = 30;
+  public static final int t_equal = 29;
+  public static final int t_leftbracket = 37;
+  public static final int t_less = 25;
+  public static final int t_multiplication = 22;
+  public static final int t_leftbrace = 39;
+  public static final int t_break = 3;
+  public static final int t_period = 34;
+  public static final int t_rightbracket = 38;
+  public static final int t_bool = 2;
+  public static final int t_double = 5;
+  public static final int t_rightbrace = 40;
+  public static final int t_plus = 20;
+  public static final int t_int = 11;
+  public static final int t_newarray = 13;
+  public static final int t_while = 19;
+
+  /* non terminals */
+  static final int ReturnStmt = 25;
+  static final int StmtStar = 19;
+  static final int IDs = 11;
+  static final int Call = 30;
+  static final int ForStmt = 23;
+  static final int FieldStar = 12;
+  static final int Formals = 7;
+  static final int Constant = 32;
+  static final int Stmt = 20;
+  static final int ExprPlus = 27;
+  static final int PrintStmt = 26;
+  static final int Field = 13;
+  static final int Actuals = 31;
+  static final int Expr = 28;
+  static final int ClassDecl = 8;
+  static final int Decl = 2;
+  static final int Type = 5;
+  static final int ExprQ = 33;
+  static final int VariableStar = 18;
+  static final int Prog = 0;
+  static final int A = 1;
+  static final int ProtoStar = 15;
+  static final int BreakStmt = 24;
+  static final int Prototype = 16;
+  static final int InterfaceDecl = 14;
+  static final int WhileStmt = 22;
+  static final int StmtBlock = 17;
+  static final int Variable = 4;
+  static final int FunctionDecl = 6;
+  static final int Implements = 10;
+  static final int Lvalue = 29;
+  static final int VariableDecl = 3;
+  static final int Extends = 9;
+  static final int IfStmt = 21;
+}
+
