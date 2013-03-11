@@ -1,0 +1,156 @@
+Prog ::= A
+     ;
+
+A ::= A Decl
+  | Decl
+  ;
+
+// Declaration
+Decl ::= VariableDecl
+     | FunctionDecl
+     | ClassDecl
+     | InterfaceDecl
+     ;
+
+VariableDecl ::= Variable t_semicolon
+             ;
+
+Variable ::= Type t_id;
+
+Type ::= t_int 
+     | t_double
+     | t_bool
+     | t_string
+     | Type t_leftbracket t_rightbracket
+     | t_id
+     ;
+
+FunctionDecl ::= Type t_id t_leftparen Formals t_rightparen StmtBlock
+             | t_void t_id t_leftparen Formals t_rightparen StmtBlock
+             ;
+
+Formals ::= Formals t_comma Variable
+        | Variable
+        | 
+        ;
+
+ClassDecl ::= t_class t_id Extends Implements t_leftbrace FieldStar t_rightbrace
+
+Extends ::= t_extends t_id
+        |
+        ;
+
+Implements ::= t_implements IDs
+           ;
+
+
+IDs ::= ID t_comma t_id;
+    | t_id
+    ;
+
+
+FieldStar ::= FieldStar Field
+          | 
+          ;
+
+Field ::= VariableDecl
+      | FunctionDecl
+      ;
+
+InterfaceDecl ::= t_interface t_id t_leftbrace ProtoStar t_rightbrace
+              ;
+
+ProtoStar ::= ProtoStar Prototype
+          | Prototype
+          | 
+          ;
+
+Prototype ::= Type t_id t_leftparen Formals t_rightparen t_semicolon
+          | t_void t_id t_leftparen Formals t_rightparen t_semicolon
+          ;
+
+StmtBlock ::= t_leftbrace VariableStar StmtStar t_rightbrace
+
+VariableStar ::= VariableStar VariableDecl
+             |
+             ;
+
+StmtStar ::= StmtStar Stmt
+         | Stmt
+         |
+         ;
+
+Stmt ::= ExprQ t_semicolon
+     | IfStmt
+     | WhileStmt
+     | ForStmt
+     | BreakStmt
+     | ReturnStmt
+     | PrintStmt
+     | StmtBlock
+     ;
+
+
+IfStmt ::= t_if t_leftparen Expr t_rightparen Stmt
+       | t_if t_leftparen Expr t_rightparen Stmt t_else Stmt
+       ;
+
+
+WhileStmt ::= t_while t_leftparen Expr t_rightparen Stmt
+          ;
+
+
+ForStmt ::= t_for t_leftparen ExprQ t_semicolon Expr t_semicolon ExprQ t_rightparen Stmt
+        ;
+
+
+BreakStmt ::= t_break t_semicolon
+          ;
+
+ReturnStmt ::= t_return ExprQ t_semicolon
+           ;
+
+PrintStmt ::= t_println t_leftparen ExprPlus t_rightparen t_semicolon
+          ;
+
+ExprPlus ::= ExprPlus t_comma Expr
+         | Expr
+         ;
+
+Expr ::= Lvalue t_assignop Expr 
+     | Constant
+     | Lvalue
+     | Call
+     | t_leftparen Expr t_rightparen
+     | Expr t_plus Expr
+     | Expr t_minus Expr
+     | Expr t_multiplication Expr
+     | Expr t_division Expr
+     | t_minus Expr
+     | Expr t_less Expr
+     | Expr t_greater Expr
+     | Expr t_equal Expr
+     | Expr t_notequal Expr
+     | t_readln t_leftparen t_rightparen
+     | t_newarray t_leftparen t_intconstant t_comma Type t_rightparen
+     ;
+
+Lvalue ::= t_id
+       | Expr t_leftbracket Expr t_rightbracket
+       | Expr t_period t_id
+       ;
+
+Call ::= t_id t_leftparen Actuals t_rightparen
+     | t_id t_period t_id t_leftparen Actuals t_rightparen
+     ;
+
+Actuals ::= ExprPlus
+        | 
+        ; 
+
+Constant ::= t_intconstant
+         | t_doubleconstant
+         | t_stringconstant
+         | t_boolconstant
+         ;
+         
