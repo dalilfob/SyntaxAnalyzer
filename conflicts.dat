@@ -1,0 +1,291 @@
+Warning : *** Shift/Reduce conflict found in state #83
+  between Lvalue ::= t_id (*)
+  and     Call ::= t_id (*) t_period t_id t_leftparen Actuals t_rightparen
+  under symbol t_period
+  Resolved in favor of shifting.
+
+Warning : *** Reduce/Reduce conflict found in state #64
+  between Lvalue ::= t_id (*)
+  and     Type ::= t_id (*)
+  under symbols: {t_leftbracket}
+  Resolved in favor of the second production.
+
+Warning : *** Shift/Reduce conflict found in state #64
+  between Lvalue ::= t_id (*)
+  and     Call ::= t_id (*) t_period t_id t_leftparen Actuals t_rightparen
+  under symbol t_period
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #64
+  between Lvalue ::= t_id (*)
+  under symbol t_leftbracket
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #64
+  between Type ::= t_id (*)
+  and     Call ::= t_id (*) t_period t_id t_leftparen Actuals t_rightparen
+  under symbol t_period
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #64
+  between Type ::= t_id (*)
+  under symbol t_leftbracket
+  Resolved in favor of shifting.
+
+Warning : *** Reduce/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     ExprQ ::= (*)
+  under symbols: {t_semicolon}
+  Resolved in favor of the first production.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     BreakStmt ::= (*) t_break t_semicolon
+  under symbol t_break
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     ForStmt ::= (*) t_for t_leftparen ExprQ t_semicolon Expr t_semicolon ExprQ t_rightparen
+  under symbol t_for
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     IfStmt ::= (*) t_if t_leftparen Expr t_rightparen Stmt
+  and     IfStmt ::= (*) t_if t_leftparen Expr t_rightparen Stmt t_else Stmt
+  under symbol t_if
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     Expr ::= (*) t_newarray t_leftparen t_intconstant t_comma Type t_rightparen
+  under symbol t_newarray
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     PrintStmt ::= (*) t_println t_leftparen ExprPlus t_rightparen t_semicolon
+  under symbol t_println
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     Expr ::= (*) t_readln t_leftparen t_rightparen
+  under symbol t_readln
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     ReturnStmt ::= (*) t_return ExprQ t_semicolon
+  under symbol t_return
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     WhileStmt ::= (*) t_while t_leftparen Expr t_rightparen Stmt
+  under symbol t_while
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  under symbol t_semicolon
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     Expr ::= (*) t_leftparen Expr t_rightparen
+  under symbol t_leftparen
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     StmtBlock ::= (*) t_leftbrace VariableStar StmtStar t_rightbrace
+  under symbol t_leftbrace
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     Constant ::= (*) t_boolconstant
+  under symbol t_boolconstant
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     Constant ::= (*) t_intconstant
+  under symbol t_intconstant
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     Constant ::= (*) t_doubleconstant
+  under symbol t_doubleconstant
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     Constant ::= (*) t_stringconstant
+  under symbol t_stringconstant
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between StmtStar ::= (*)
+  and     Type ::= (*) t_id
+  and     Call ::= (*) t_id t_leftparen Actuals t_rightparen
+  and     Call ::= (*) t_id t_period t_id t_leftparen Actuals t_rightparen
+  and     Lvalue ::= (*) t_id
+  under symbol t_id
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     BreakStmt ::= (*) t_break t_semicolon
+  under symbol t_break
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     ForStmt ::= (*) t_for t_leftparen ExprQ t_semicolon Expr t_semicolon ExprQ t_rightparen
+  under symbol t_for
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     IfStmt ::= (*) t_if t_leftparen Expr t_rightparen Stmt
+  and     IfStmt ::= (*) t_if t_leftparen Expr t_rightparen Stmt t_else Stmt
+  under symbol t_if
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     Expr ::= (*) t_newarray t_leftparen t_intconstant t_comma Type t_rightparen
+  under symbol t_newarray
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     PrintStmt ::= (*) t_println t_leftparen ExprPlus t_rightparen t_semicolon
+  under symbol t_println
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     Expr ::= (*) t_readln t_leftparen t_rightparen
+  under symbol t_readln
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     ReturnStmt ::= (*) t_return ExprQ t_semicolon
+  under symbol t_return
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     WhileStmt ::= (*) t_while t_leftparen Expr t_rightparen Stmt
+  under symbol t_while
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  under symbol t_semicolon
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     Expr ::= (*) t_leftparen Expr t_rightparen
+  under symbol t_leftparen
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     StmtBlock ::= (*) t_leftbrace VariableStar StmtStar t_rightbrace
+  under symbol t_leftbrace
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     Constant ::= (*) t_boolconstant
+  under symbol t_boolconstant
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     Constant ::= (*) t_intconstant
+  under symbol t_intconstant
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     Constant ::= (*) t_doubleconstant
+  under symbol t_doubleconstant
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     Constant ::= (*) t_stringconstant
+  under symbol t_stringconstant
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #50
+  between ExprQ ::= (*)
+  and     Type ::= (*) t_id
+  and     Call ::= (*) t_id t_leftparen Actuals t_rightparen
+  and     Call ::= (*) t_id t_period t_id t_leftparen Actuals t_rightparen
+  and     Lvalue ::= (*) t_id
+  under symbol t_id
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #144
+  between IfStmt ::= t_if t_leftparen Expr t_rightparen Stmt (*)
+  and     IfStmt ::= t_if t_leftparen Expr t_rightparen Stmt (*) t_else Stmt
+  under symbol t_else
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #19
+  between ProtoStar ::= (*)
+  and     Type ::= (*) t_bool
+  under symbol t_bool
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #19
+  between ProtoStar ::= (*)
+  and     Type ::= (*) t_double
+  under symbol t_double
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #19
+  between ProtoStar ::= (*)
+  and     Type ::= (*) t_int
+  under symbol t_int
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #19
+  between ProtoStar ::= (*)
+  and     Type ::= (*) t_string
+  under symbol t_string
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #19
+  between ProtoStar ::= (*)
+  and     Prototype ::= (*) t_void t_id t_leftparen Formals t_rightparen t_semicolon
+  under symbol t_void
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #19
+  between ProtoStar ::= (*)
+  and     Type ::= (*) t_id
+  under symbol t_id
+  Resolved in favor of shifting.
+
+------- CUP v0.11a beta 20060608 Parser Generation Summary -------
+  0 errors and 46 warnings
+  46 terminals, 34 non-terminals, and 92 productions declared,
+  producing 184 unique parse states.
+  0 terminals declared but not used.
+  0 non-terminals declared but not used.
+  0 productions never reduced.
+  46 conflicts detected (50 expected).
+  Code written to "parser.java", and "sym.java".
+---------------------------------------------------- (v0.11a beta 20060608)
+
