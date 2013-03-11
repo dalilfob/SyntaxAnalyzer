@@ -1,6 +1,7 @@
 /*CS 411 Lexer*/
 
 import java.util.ArrayList;
+import java_cup.runtime.*;
 
 %%
 
@@ -16,32 +17,36 @@ import java.util.ArrayList;
 
 %{
 
-  public class symbol_table {
-    public int [] control = new int[52];
-    public ArrayList<Integer> next = new ArrayList<Integer>();
-    public ArrayList<Character> symbol = new ArrayList<Character>();
-    
-    public symbol_table() {
-        for (int i = 0; i < this.control.length; ++i) {
-            this.control[i] = -1; 
+    private Symbol symbol(int type) {
+        return new Symbol(type,yyline,yycolumn);
+    }
+
+    public class symbol_table {
+        public int [] control = new int[52];
+        public ArrayList<Integer> next = new ArrayList<Integer>();
+        public ArrayList<Character> symbol = new ArrayList<Character>();
+        
+        public symbol_table() {
+            for (int i = 0; i < this.control.length; ++i) {
+                this.control[i] = -1; 
+            }
         }
     }
-  }
 
-  public symbol_table s = new symbol_table();
+    public symbol_table s = new symbol_table();
 
   // Return array index of character
-  public int alphaIndex(char c) {
-    int v = c;
-    if (v >= 97) {
-        return v - 97 + 26;
+    public int alphaIndex(char c) {
+        int v = c;
+        if (v >= 97) {
+            return v - 97 + 26;
+        }
+        return v - 65; 
     }
-    return v - 65; 
-  }
 
-  public void trie(String str) {
-    int value = alphaIndex(str.charAt(0));
-    int ptr = s.control[value];
+    public void trie(String str) {
+        int value = alphaIndex(str.charAt(0));
+        int ptr = s.control[value];
 
     if (ptr == -1) { // Undefined
         // point to last 
@@ -97,91 +102,91 @@ import java.util.ArrayList;
 
     }
 
-  }
+}
 
-    public void printControl(int head, int tail) {
-        System.out.printf("%-10s", "switch:");
-        int v = 0;
-        for (; head < tail; ++head) {
-            v = s.control[head];
-            if (v == -1) {
-                System.out.print("$   ");
-            }
-            else {
-                System.out.printf("%-3d ", v);
-            }
+public void printControl(int head, int tail) {
+    System.out.printf("%-10s", "switch:");
+    int v = 0;
+    for (; head < tail; ++head) {
+        v = s.control[head];
+        if (v == -1) {
+            System.out.print("$   ");
         }
-        System.out.println("\n");
-    }
-
-    public void printSymbol(int head, int tail) {
-        System.out.printf("%-10s", "symbol:");
-        for(int i = head; i < tail; ++i) {
-            System.out.printf("%c   ", s.symbol.get(i));
-        }
-        System.out.println();
-    }
-
-    public void printNext(int head, int tail) {
-        System.out.printf("%-10s", "next:");
-        int v = 0;
-        for (int i = head; i < tail; ++i) {
-            v = s.next.get(i);
-            if (v == -1) {
-                System.out.print("$   ");
-            }
-            else {
-                System.out.printf("%-3d ", v);
-            }
-        }
-        System.out.println("\n");       
-
-    }
-
-    private void equalizeNext() {
-        if (s.symbol.size() > s.next.size()) {
-            while (s.next.size() != s.symbol.size()) {
-                s.next.add(-1);
-            }
+        else {
+            System.out.printf("%-3d ", v);
         }
     }
+    System.out.println("\n");
+}
 
-    public void printTable() {
-        String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        System.out.printf("%-10s","");
-        int head = 0;
-        int i = 0;
-        for (; i < 52; ++i) {
-            if ((i+1)%20 == 0) {
-                System.out.println();
-                printControl(head,i);
-                System.out.printf("%-10s","");
-                head = i;
-            }
-            System.out.printf("%c   ", alpha.charAt(i));
-        }
-        System.out.println();
-        printControl(head,i);
-
-        equalizeNext();
-
-        i = 0;
-        head  = 0;
-        System.out.printf("%-10s",""); 
-        for (; i < s.symbol.size(); ++i) {
-            if ((i+1)%20 == 0) {
-                System.out.println();
-                printSymbol(head,i);
-                printNext(head,i);
-                System.out.printf("%-10s","");
-                head = i;
-            }
-            System.out.printf("%-3d ", i);
-        }
-        System.out.println();
-        printSymbol(head,i);
-        printNext(head,i);
+public void printSymbol(int head, int tail) {
+    System.out.printf("%-10s", "symbol:");
+    for(int i = head; i < tail; ++i) {
+        System.out.printf("%c   ", s.symbol.get(i));
     }
+    System.out.println();
+}
+
+public void printNext(int head, int tail) {
+    System.out.printf("%-10s", "next:");
+    int v = 0;
+    for (int i = head; i < tail; ++i) {
+        v = s.next.get(i);
+        if (v == -1) {
+            System.out.print("$   ");
+        }
+        else {
+            System.out.printf("%-3d ", v);
+        }
+    }
+    System.out.println("\n");       
+
+}
+
+private void equalizeNext() {
+    if (s.symbol.size() > s.next.size()) {
+        while (s.next.size() != s.symbol.size()) {
+            s.next.add(-1);
+        }
+    }
+}
+
+public void printTable() {
+    String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    System.out.printf("%-10s","");
+    int head = 0;
+    int i = 0;
+    for (; i < 52; ++i) {
+        if ((i+1)%20 == 0) {
+            System.out.println();
+            printControl(head,i);
+            System.out.printf("%-10s","");
+            head = i;
+        }
+        System.out.printf("%c   ", alpha.charAt(i));
+    }
+    System.out.println();
+    printControl(head,i);
+
+    equalizeNext();
+
+    i = 0;
+    head  = 0;
+    System.out.printf("%-10s",""); 
+    for (; i < s.symbol.size(); ++i) {
+        if ((i+1)%20 == 0) {
+            System.out.println();
+            printSymbol(head,i);
+            printNext(head,i);
+            System.out.printf("%-10s","");
+            head = i;
+        }
+        System.out.printf("%-3d ", i);
+    }
+    System.out.println();
+    printSymbol(head,i);
+    printNext(head,i);
+}
 
 %}
 
@@ -228,61 +233,61 @@ Comment = ({TraditionalComment}|{EndOfLineComment})
 
 {Comment} { }
 
-{string} {System.out.print("stringconstant "); return tokens.t_stringconstant.ordinal();}
+{string} {return symbol(sym.t_stringconstant);}
 
 /*Keywords*/
 
-bool {System.out.printf("%s ",yytext()); return tokens.t_bool.ordinal();}
-break {System.out.printf("%s ",yytext()); return tokens.t_break.ordinal();}
-class {System.out.printf("%s ",yytext()); return tokens.t_class.ordinal();}
-double {System.out.printf("%s ",yytext()); return tokens.t_double.ordinal();}
-else {System.out.printf("%s ",yytext()); return tokens.t_else.ordinal();}
-extends {System.out.printf("%s ",yytext()); return tokens.t_extends.ordinal();}
-for {System.out.printf("%s ",yytext()); return tokens.t_for.ordinal();}
-if {System.out.printf("%s ",yytext()); return tokens.t_if.ordinal();}
-implements {System.out.printf("%s ",yytext()); return tokens.t_implements.ordinal();}
-int {System.out.printf("%s ",yytext()); return tokens.t_int.ordinal();}
-interface {System.out.printf("%s ",yytext()); return tokens.t_interface.ordinal();}
-newarray {System.out.printf("%s ",yytext()); return tokens.t_newarray.ordinal();}
-println {System.out.printf("%s ",yytext()); return tokens.t_println.ordinal();}
-readln {System.out.printf("%s ",yytext()); return tokens.t_readln.ordinal();}
-return {System.out.printf("%s ",yytext()); return tokens.t_return.ordinal();}
-string {System.out.printf("%s ",yytext()); return tokens.t_string.ordinal();}
-void {System.out.printf("%s ",yytext()); return tokens.t_void.ordinal();}
-while {System.out.printf("%s ",yytext()); return tokens.t_while.ordinal();}
+bool        {return symbol(sym.t_bool);}
+break       {return symbol(sym.t_break);}
+class       {return symbol(sym.t_calss);}
+double      {return symbol(sym.t_double);}
+else        {return symbol(sym.t_else);}
+extends     {return symbol(sym.t_extends);}
+for         {return symbol(sym.t_for);}
+if          {return symbol(sym.t_if);}
+implements  {return symbol(sym.t_implements);}
+int         {return symbol(sym.t_int);}
+interface   {return symbol(sym.t_interface);}
+newarray    {return symbol(sym.t_newarray);}
+println     {return symbol(sym.t_println);}
+readln      {return symbol(sym.t_readln);}
+return      {return symbol(sym.t_return);}
+string      {return symbol(sym.t_string);}
+void        {return symbol(sym.t_void);}
+while       {return symbol(sym.t_while);}
 
 /*stupid thing has to be declared up here or it will match id */
-true|false {System.out.print("boolconstant "); return tokens.t_boolconstant.ordinal();}
+true|false   {return symbol(sym.t_boolconstant);}
 
-{identifier} {System.out.print("id "); trie(yytext()); return tokens.t_id.ordinal();}
+{identifier} {return symbol(sym.t_id); trie(yytext());}
 {whitespace} { }
-{newline} {System.out.print("\n");} /*preserve line breaks*/
-{integer} {System.out.print("intconstant "); return tokens.t_intconstant.ordinal();}
-{double} {System.out.print("doubleconstant "); return tokens.t_doubleconstant.ordinal();}
+{newline}    { } /*preserve line breaks*/
+{integer}    {return symbol(sym.t_intconstant);}
+{double}     {return symbol(sym.t_doubleconstant);}
 
 
 /*Operators and Punctuation*/
 
-"+" {System.out.print("plus "); return tokens.t_plus.ordinal();}
-"-" {System.out.print("minus "); return tokens.t_minus.ordinal();}
-"*" {System.out.print("multiplication "); return tokens.t_multiplication.ordinal();}
-"/" {System.out.print("division "); return tokens.t_division.ordinal();}
-"%" {System.out.print("mod "); return tokens.t_mod.ordinal();}
-"<" {System.out.print("less "); return tokens.t_less.ordinal();}
-"<=" {System.out.print("lessequal "); return tokens.t_lessequal.ordinal();}
-">" {System.out.print("greater "); return tokens.t_greater.ordinal();}
-">=" {System.out.print("greaterequal "); return tokens.t_greaterequal.ordinal();}
-"==" {System.out.print("equal "); return tokens.t_equal.ordinal();}
-"!=" {System.out.print("notequal "); return tokens.t_notequal.ordinal();}
-"=" {System.out.print("assignop "); return tokens.t_assignop.ordinal();}
-";" {System.out.print("semicolon "); return tokens.t_semicolon.ordinal();}
-"," {System.out.print("comma "); return tokens.t_comma.ordinal();}
-"." {System.out.print("period "); return tokens.t_period.ordinal();}
-"(" {System.out.print("leftparen "); return tokens.t_leftparen.ordinal();}
-")" {System.out.print("rightparen "); return tokens.t_rightparen.ordinal();}
-"[" {System.out.print("rightbracket "); return tokens.t_rightbracket.ordinal();}
-"]" {System.out.print("leftbracket "); return tokens.t_leftbracket.ordinal();}
-"{" {System.out.print("leftbrace "); return tokens.t_leftbrace.ordinal();}
-"}" {System.out.print("rightbrace "); return tokens.t_rightbrace.ordinal();}
+"+"     {return symbol(sym.t_plus);}
+"-"     {return symbol(sym.t_minus);}
+"*"     {return symbol(sym.t_multiplication);}
+"/"     {return symbol(sym.t_division);}
+"%"     {return symbol(sym.t_mod);}
+"<"     {return symbol(sym.t_less);}
+"<="    {return symbol(sym.t_lessequal);}
+">"     {return symbol(sym.t_greater);}
+">="    {return symbol(sym.t_greaterequal);}
+"=="    {return symbol(sym.t_equal);}
+"!="    {return symbol(sym.t_notequal);}
+"="     {return symbol(sym.t_assignop);}
+";"     {return symbol(sym.t_semicolon);}
+","     {return symbol(sym.t_comma);}
+"."     {return symbol(sym.t_period);}
+"("     {return symbol(sym.t_leftparen);}
+")"     {return symbol(sym.t_rightparen);}
+"["     {return symbol(sym.t_rightbracket);}
+"]"     {return symbol(sym.t_leftbracket);}
+"{"     {return symbol(sym.t_rightbrace);}
+"}"     {return symbol(sym.t_leftbrace);}
 
 . { /* ignore illegal chars */ }
