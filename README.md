@@ -6,7 +6,7 @@ Toy Language Syntax Analyzer (CUP/YACC)
 
 ## Resources
 
-[(JFlex Manual](http://jflex.de/manual.html)
+[JFlex Manual](http://jflex.de/manual.html)
 
 [Cup User Manual](http://www2.cs.tum.edu/projects/cup/manual.html#basic-symbols)
 
