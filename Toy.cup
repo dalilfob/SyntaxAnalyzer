@@ -1,3 +1,27 @@
+import java_cup.runtime.*;
+
+/* Terminal Tokens */
+
+terminal    t_bool, t_break, t_class, t_double;
+terminal    t_else, t_extends, t_for, t_if, t_implements;
+terminal    t_int, t_interface, t_newarray, t_println;
+terminal    t_readln, t_return, t_string, t_void, t_while;
+terminal    t_plus, t_minus, t_multiplication, t_division;
+terminal    t_mod, t_less, t_lessequal, t_greater, t_greaterequal;
+terminal    t_equal, t_notequal, t_assignop, t_semicolon, t_comma;
+terminal    t_period, t_leftparen, t_rightparen, t_leftbracket;
+terminal    t_rightbracket, t_leftbrace, t_rightbrace, t_boolconstant;
+terminal    t_intconstant, t_doubleconstant, t_stringconstant, t_id;
+
+/* Non Terminals */
+non terminal Prog, A, Decl, VariableDecl, Variable;
+non terminal Type, FunctionDecl, Formals, ClassDecl;
+non terminal Extends, Implements, IDs, FieldStar, Field;
+non terminal InterfaceDecl, ProtoStar, Prototype, StmtBlock;
+non terminal VariableStar, StmtStar, Stmt, IfStmt, WhileStmt;
+non terminal ForStmt, BreakStmt, ReturnStmt, PrintStmt, ExprPlus;
+non terminal Expr, Lvalue, Call, Actuals, Constant;
+
 Prog ::= A
      ;
 
@@ -153,4 +177,4 @@ Constant ::= t_intconstant
          | t_stringconstant
          | t_boolconstant
          ;
-         
+
