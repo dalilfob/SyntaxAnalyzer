@@ -5,7 +5,7 @@ Toy Language Syntax Analyzer (CUP/YACC)
 #CUP Compile
 
 ```
-javac -jar java-cup-11a.jar -expect 50 -nonterms toy.cup
+java -jar java-cup-11a.jar -expect 50 -nonterms toy.cup
 ```
 
 ## Resources
