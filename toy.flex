@@ -6,8 +6,9 @@ import java_cup.runtime.*;
 %%
 
 %public
-%cup
 %class Lexer
+%cup
+%type Symbol
 %intwrap
 %unicode
 %line
@@ -17,8 +18,8 @@ import java_cup.runtime.*;
 
 %{
 
-    private Symbol symbol(int type) {
-        return new Symbol(type,yyline,yycolumn);
+    private Symbol symbol(int sym) {
+        return new Symbol(sym, yyline+1, yycolumn+1);
     }
 
     public class symbol_table {
@@ -239,7 +240,7 @@ Comment = ({TraditionalComment}|{EndOfLineComment})
 
 bool        {return symbol(sym.t_bool);}
 break       {return symbol(sym.t_break);}
-class       {return symbol(sym.t_calss);}
+class       {return symbol(sym.t_class);}
 double      {return symbol(sym.t_double);}
 else        {return symbol(sym.t_else);}
 extends     {return symbol(sym.t_extends);}
@@ -259,7 +260,7 @@ while       {return symbol(sym.t_while);}
 /*stupid thing has to be declared up here or it will match id */
 true|false   {return symbol(sym.t_boolconstant);}
 
-{identifier} {return symbol(sym.t_id); trie(yytext());}
+{identifier} {trie(yytext());return symbol(sym.t_id);}
 {whitespace} { }
 {newline}    { } /*preserve line breaks*/
 {integer}    {return symbol(sym.t_intconstant);}
@@ -290,4 +291,5 @@ true|false   {return symbol(sym.t_boolconstant);}
 "{"     {return symbol(sym.t_rightbrace);}
 "}"     {return symbol(sym.t_leftbrace);}
 
-. { /* ignore illegal chars */ }
+.       {return symbol(sym.error);}
+<<EOF>> {return symbol(sym.EOF);}
