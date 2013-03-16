@@ -2,6 +2,14 @@
 
 Toy Language Syntax Analyzer (CUP/YACC) 
 
+# Modified CUP Compile
+
+In order to show shift actions, requires the use of the modified cup files:
+
+```
+java java_cup.Main -expect 50 -nonterms toy.cup
+```
+
 #CUP Compile
 
 ```
