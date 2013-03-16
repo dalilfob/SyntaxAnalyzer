@@ -238,58 +238,58 @@ Comment = ({TraditionalComment}|{EndOfLineComment})
 
 /*Keywords*/
 
-bool        {return symbol(sym.t_bool);}
-break       {return symbol(sym.t_break);}
-class       {return symbol(sym.t_class);}
-double      {return symbol(sym.t_double);}
-else        {return symbol(sym.t_else);}
-extends     {return symbol(sym.t_extends);}
-for         {return symbol(sym.t_for);}
-if          {return symbol(sym.t_if);}
-implements  {return symbol(sym.t_implements);}
-int         {return symbol(sym.t_int);}
-interface   {return symbol(sym.t_interface);}
-newarray    {return symbol(sym.t_newarray);}
-println     {return symbol(sym.t_println);}
-readln      {return symbol(sym.t_readln);}
-return      {return symbol(sym.t_return);}
-string      {return symbol(sym.t_string);}
-void        {return symbol(sym.t_void);}
-while       {return symbol(sym.t_while);}
+bool        {System.out.printf("%n%s ",yytext());return symbol(sym.t_bool);}
+break       {System.out.printf("%n%s ",yytext());return symbol(sym.t_break);}
+class       {System.out.printf("%n%s ",yytext());return symbol(sym.t_class);}
+double      {System.out.printf("%n%s ",yytext());return symbol(sym.t_double);}
+else        {System.out.printf("%n%s ",yytext());return symbol(sym.t_else);}
+extends     {System.out.printf("%n%s ",yytext());return symbol(sym.t_extends);}
+for         {System.out.printf("%n%s ",yytext());return symbol(sym.t_for);}
+if          {System.out.printf("%n%s ",yytext());return symbol(sym.t_if);}
+implements  {System.out.printf("%n%s ",yytext());return symbol(sym.t_implements);}
+int         {System.out.printf("%n%s ",yytext());return symbol(sym.t_int);}
+interface   {System.out.printf("%n%s ",yytext());return symbol(sym.t_interface);}
+newarray    {System.out.printf("%n%s ",yytext());return symbol(sym.t_newarray);}
+println     {System.out.printf("%n%s ",yytext());return symbol(sym.t_println);}
+readln      {System.out.printf("%n%s ",yytext());return symbol(sym.t_readln);}
+return      {System.out.printf("%n%s ",yytext());return symbol(sym.t_return);}
+string      {System.out.printf("%n%s ",yytext());return symbol(sym.t_string);}
+void        {System.out.printf("%n%s ",yytext());return symbol(sym.t_void);}
+while       {System.out.printf("%n%s ",yytext());return symbol(sym.t_while);}
 
 /*stupid thing has to be declared up here or it will match id */
-true|false   {return symbol(sym.t_boolconstant);}
+true|false   {System.out.printf("%n%s ",yytext());return symbol(sym.t_boolconstant);}
 
-{identifier} {trie(yytext());return symbol(sym.t_id);}
+{identifier} {System.out.printf("%n%s ",yytext());trie(yytext());return symbol(sym.t_id);}
 {whitespace} { }
-{newline}    { } /*preserve line breaks*/
-{integer}    {return symbol(sym.t_intconstant);}
-{double}     {return symbol(sym.t_doubleconstant);}
+{LineTerminator} { } /*preserve line breaks*/
+{integer}    {System.out.printf("%n%s ",yytext());return symbol(sym.t_intconstant);}
+{double}     {System.out.printf("%n%s ",yytext());return symbol(sym.t_doubleconstant);}
 
 
 /*Operators and Punctuation*/
 
-"+"     {return symbol(sym.t_plus);}
-"-"     {return symbol(sym.t_minus);}
-"*"     {return symbol(sym.t_multiplication);}
-"/"     {return symbol(sym.t_division);}
-"%"     {return symbol(sym.t_mod);}
-"<"     {return symbol(sym.t_less);}
-"<="    {return symbol(sym.t_lessequal);}
-">"     {return symbol(sym.t_greater);}
-">="    {return symbol(sym.t_greaterequal);}
-"=="    {return symbol(sym.t_equal);}
-"!="    {return symbol(sym.t_notequal);}
-"="     {return symbol(sym.t_assignop);}
-";"     {return symbol(sym.t_semicolon);}
-","     {return symbol(sym.t_comma);}
-"."     {return symbol(sym.t_period);}
-"("     {return symbol(sym.t_leftparen);}
-")"     {return symbol(sym.t_rightparen);}
-"["     {return symbol(sym.t_rightbracket);}
-"]"     {return symbol(sym.t_leftbracket);}
-"{"     {return symbol(sym.t_rightbrace);}
-"}"     {return symbol(sym.t_leftbrace);}
+"+"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_plus);}
+"-"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_minus);}
+"*"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_multiplication);}
+"/"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_division);}
+"%"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_mod);}
+"<"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_less);}
+"<="    {System.out.printf("%n%s ",yytext());return symbol(sym.t_lessequal);}
+">"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_greater);}
+">="    {System.out.printf("%n%s ",yytext());return symbol(sym.t_greaterequal);}
+"=="    {System.out.printf("%n%s ",yytext());return symbol(sym.t_equal);}
+"!="    {System.out.printf("%n%s ",yytext());return symbol(sym.t_notequal);}
+"="     {System.out.printf("%n%s ",yytext());return symbol(sym.t_assignop);}
+";"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_semicolon);}
+","     {System.out.printf("%n%s ",yytext());return symbol(sym.t_comma);}
+"."     {System.out.printf("%n%s ",yytext());return symbol(sym.t_period);}
+"("     {System.out.printf("%n%s ",yytext());return symbol(sym.t_leftparen);}
+")"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_rightparen);}
+"["     {System.out.printf("%n%s ",yytext());return symbol(sym.t_leftbracket);}
+"]"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_rightbracket);}
+"{"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_leftbrace);}
+"}"     {System.out.printf("%n%s ",yytext());return symbol(sym.t_rightbrace);}
 
-.       {return symbol(sym.error);}
+.       {System.out.printf("%n%s ",yytext());return symbol(sym.error);}
 <<EOF>> {return symbol(sym.EOF);}
