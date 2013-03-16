@@ -7,17 +7,10 @@ import java_cup.runtime.*;
 parser code 
     {:
     private Lexer lexer;
-    private File file;
 
-    public parser(File file) {
-        this();
-        this.file = file;
-        try {
-            lexer = new Lexer(new FileReader(file));
-        } 
-        catch(IOException e) {
-            System.out.println("Unable to open file " + file);
-        }
+    public parser(Lexer lex) {
+        super(lex);
+        this.lexer = lex;
     }
 
     public int prod_num = 0;
@@ -64,168 +57,168 @@ precedence left t_plus, t_minus, t_multiplication, t_division, t_mod;
 start with Prog;
 
 /* Grammar */
-Prog ::= A {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Prog ::= A {:System.out.printf("[reduce %d]",sym.Prog);:}
      ;
 
-A ::= A Decl {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-  | Decl     {:System.out.printf("[reduce %d]",parser.prod_num++);:}  
+A ::= A Decl {:System.out.printf("[reduce %d]",sym.A);:}
+  | Decl     {:System.out.printf("[reduce %d]",sym.A);:}  
   ;
 
 // Declaration
-Decl ::= VariableDecl {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | FunctionDecl   {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | ClassDecl      {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | InterfaceDecl  {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Decl ::= VariableDecl {:System.out.printf("[reduce %d]",sym.Decl);:}
+     | FunctionDecl   {:System.out.printf("[reduce %d]",sym.Decl);:}
+     | ClassDecl      {:System.out.printf("[reduce %d]",sym.Decl);:}
+     | InterfaceDecl  {:System.out.printf("[reduce %d]",sym.Decl);:}
      ;
 
-VariableDecl ::= Variable t_semicolon {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+VariableDecl ::= Variable t_semicolon {:System.out.printf("[reduce %d]",sym.VariableDecl);:}
              ;
 
-Variable ::= Type t_id {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Variable ::= Type t_id {:System.out.printf("[reduce %d]",sym.Variable);:}
          ;
 
-Type ::= t_int                            {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | t_double                           {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | t_bool                             {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | t_string                           {:System.out.printf("[reduce %d]",parser.prod_num++);:} 
-     | Type t_leftbracket t_rightbracket  {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | t_id                               {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Type ::= t_int                            {:System.out.printf("[reduce %d]",sym.Type);:}
+     | t_double                           {:System.out.printf("[reduce %d]",sym.Type);:}
+     | t_bool                             {:System.out.printf("[reduce %d]",sym.Type);:}
+     | t_string                           {:System.out.printf("[reduce %d]",sym.Type);:} 
+     | Type t_leftbracket t_rightbracket  {:System.out.printf("[reduce %d]",sym.Type);:}
+     | t_id                               {:System.out.printf("[reduce %d]",sym.Type);:}
      ;
 
-FunctionDecl ::= Type t_id t_leftparen Formals t_rightparen StmtBlock {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-             | t_void t_id t_leftparen Formals t_rightparen StmtBlock {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+FunctionDecl ::= Type t_id t_leftparen Formals t_rightparen StmtBlock {:System.out.printf("[reduce %d]",sym.FunctionDecl);:}
+             | t_void t_id t_leftparen Formals t_rightparen StmtBlock {:System.out.printf("[reduce %d]",sym.FunctionDecl);:}
              ;
 
-Formals ::= Formals t_comma Variable {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-        | Variable {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-        | {:System.out.printf("[reduce %d]",parser.prod_num++);:} 
+Formals ::= Formals t_comma Variable {:System.out.printf("[reduce %d]",sym.Formals);:}
+        | Variable {:System.out.printf("[reduce %d]",sym.Formals);:}
+        | {:System.out.printf("[reduce %d]",sym.Formals);:} 
         ;
 
-ClassDecl ::= t_class t_id Extends Implements t_leftbrace FieldStar t_rightbrace {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+ClassDecl ::= t_class t_id Extends Implements t_leftbrace FieldStar t_rightbrace {:System.out.printf("[reduce %d]",sym.ClassDecl);:}
           ;
 
-Extends ::= t_extends t_id {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-        | {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Extends ::= t_extends t_id {:System.out.printf("[reduce %d]",sym.Extends);:}
+        | {:System.out.printf("[reduce %d]",sym.Extends);:}
         ;
 
-Implements ::= t_implements IDs {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Implements ::= t_implements IDs {:System.out.printf("[reduce %d]",sym.Implements);:}
            ;
 
 
-IDs ::= IDs t_comma t_id {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-    | t_id {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+IDs ::= IDs t_comma t_id {:System.out.printf("[reduce %d]",sym.IDs);:}
+    | t_id {:System.out.printf("[reduce %d]",sym.IDs);:}
     ;
 
 
-FieldStar ::= FieldStar Field {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-          | {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+FieldStar ::= Field FieldStar {:System.out.printf("[reduce %d]",sym.FieldStar);:}
+          | {:System.out.printf("[reduce %d]",sym.FieldStar);:}
           ;
 
-Field ::= VariableDecl {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-      | FunctionDecl {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Field ::= VariableDecl {:System.out.printf("[reduce %d]",sym.Field);:}
+      | FunctionDecl {:System.out.printf("[reduce %d]",sym.Field);:}
       ; 
 
-InterfaceDecl ::= t_interface t_id t_leftbrace ProtoStar t_rightbrace {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+InterfaceDecl ::= t_interface t_id t_leftbrace ProtoStar t_rightbrace {:System.out.printf("[reduce %d]",sym.InterfaceDecl);:}
               ; 
 
-ProtoStar ::= ProtoStar Prototype {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-          | Prototype {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-          | {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+ProtoStar ::= ProtoStar Prototype {:System.out.printf("[reduce %d]",sym.ProtoStar);:}
+          | Prototype {:System.out.printf("[reduce %d]",sym.ProtoStar);:}
+          | {:System.out.printf("[reduce %d]",sym.ProtoStar);:}
           ;
 
-Prototype ::= Type t_id t_leftparen Formals t_rightparen t_semicolon {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-          | t_void t_id t_leftparen Formals t_rightparen t_semicolon {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Prototype ::= Type t_id t_leftparen Formals t_rightparen t_semicolon {:System.out.printf("[reduce %d]",sym.Prototype);:}
+          | t_void t_id t_leftparen Formals t_rightparen t_semicolon {:System.out.printf("[reduce %d]",sym.Prototype);:}
           ;
 
-StmtBlock ::= t_leftbrace VariableStar StmtStar t_rightbrace {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+StmtBlock ::= t_leftbrace VariableStar StmtStar t_rightbrace {:System.out.printf("[reduce %d]",sym.StmtBlock);:}
           ;
 
-VariableStar ::= VariableStar VariableDecl {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-             | {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+VariableStar ::= VariableStar VariableDecl {:System.out.printf("[reduce %d]",sym.VariableStar);:}
+             | {:System.out.printf("[reduce %d]",sym.VariableStar);:}
              ;
 
-StmtStar ::= StmtStar Stmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-         | Stmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-         | {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+StmtStar ::= StmtStar Stmt {:System.out.printf("[reduce %d]",sym.StmtStar);:}
+         | Stmt {:System.out.printf("[reduce %d]",sym.StmtStar);:}
+         | {:System.out.printf("[reduce %d]",sym.StmtStar);:}
          ;
 
-Stmt ::= ExprQ t_semicolon {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | IfStmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | WhileStmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | ForStmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | BreakStmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | ReturnStmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | PrintStmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | StmtBlock {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Stmt ::= ExprQ t_semicolon {:System.out.printf("[reduce %d]",sym.Stmt);:}
+     | IfStmt {:System.out.printf("[reduce %d]",sym.Stmt);:}
+     | WhileStmt {:System.out.printf("[reduce %d]",sym.Stmt);:}
+     | ForStmt {:System.out.printf("[reduce %d]",sym.Stmt);:}
+     | BreakStmt {:System.out.printf("[reduce %d]",sym.Stmt);:}
+     | ReturnStmt {:System.out.printf("[reduce %d]",sym.Stmt);:}
+     | PrintStmt {:System.out.printf("[reduce %d]",sym.Stmt);:}
+     | StmtBlock {:System.out.printf("[reduce %d]",sym.Stmt);:}
      ;
 
-ExprQ ::= Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-      | {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+ExprQ ::= Expr {:System.out.printf("[reduce %d]",sym.ExprQ);:}
+      | {:System.out.printf("[reduce %d]",sym.ExprQ);:}
       ;
 
-IfStmt ::= t_if t_leftparen Expr t_rightparen Stmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-       | t_if t_leftparen Expr t_rightparen Stmt t_else Stmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+IfStmt ::= t_if t_leftparen Expr t_rightparen Stmt {:System.out.printf("[reduce %d]",sym.IfStmt);:}
+       | t_if t_leftparen Expr t_rightparen Stmt t_else Stmt {:System.out.printf("[reduce %d]",sym.IfStmt);:}
        ;
 
 
-WhileStmt ::= t_while t_leftparen Expr t_rightparen Stmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+WhileStmt ::= t_while t_leftparen Expr t_rightparen Stmt {:System.out.printf("[reduce %d]",sym.WhileStmt);:}
           ;
 
 
-ForStmt ::= t_for t_leftparen ExprQ t_semicolon Expr t_semicolon ExprQ t_rightparen Stmt {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+ForStmt ::= t_for t_leftparen ExprQ t_semicolon Expr t_semicolon ExprQ t_rightparen Stmt {:System.out.printf("[reduce %d]",sym.ForStmt);:}
         ;
 
 
-BreakStmt ::= t_break t_semicolon {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+BreakStmt ::= t_break t_semicolon {:System.out.printf("[reduce %d]",sym.BreakStmt);:}
           ;
 
-ReturnStmt ::= t_return ExprQ t_semicolon {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+ReturnStmt ::= t_return ExprQ t_semicolon {:System.out.printf("[reduce %d]",sym.ReturnStmt);:}
            ;
 
-PrintStmt ::= t_println t_leftparen ExprPlus t_rightparen t_semicolon {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+PrintStmt ::= t_println t_leftparen ExprPlus t_rightparen t_semicolon {:System.out.printf("[reduce %d]",sym.PrintStmt);:}
           ;
 
-ExprPlus ::= ExprPlus t_comma Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-         | Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+ExprPlus ::= ExprPlus t_comma Expr {:System.out.printf("[reduce %d]",sym.ExprPlus);:}
+         | Expr {:System.out.printf("[reduce %d]",sym.ExprPlus);:}
          ;
 
-Expr ::= Lvalue t_assignop Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Constant {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Lvalue {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Call {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | t_leftparen Expr t_rightparen {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_plus Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_minus Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_multiplication Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_division Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | t_minus Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_less Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_greater Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_equal Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_notequal Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_greaterequal Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_mod Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | Expr t_lessequal Expr {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | t_readln t_leftparen t_rightparen {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | t_newarray t_leftparen t_intconstant t_comma Type t_rightparen {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Expr ::= Lvalue t_assignop Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Constant {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Lvalue {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Call {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | t_leftparen Expr t_rightparen {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_plus Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_minus Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_multiplication Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_division Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | t_minus Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_less Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_greater Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_equal Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_notequal Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_greaterequal Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_mod Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | Expr t_lessequal Expr {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | t_readln t_leftparen t_rightparen {:System.out.printf("[reduce %d]",sym.Expr);:}
+     | t_newarray t_leftparen t_intconstant t_comma Type t_rightparen {:System.out.printf("[reduce %d]",sym.Expr);:}
      ;
 
 Lvalue ::= t_id
-       | Expr t_leftbracket Expr t_rightbracket {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-       | Expr t_period t_id {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+       | Expr t_leftbracket Expr t_rightbracket {:System.out.printf("[reduce %d]",sym.Lvalue);:}
+       | Expr t_period t_id {:System.out.printf("[reduce %d]",sym.Lvalue);:}
        ;
 
-Call ::= t_id t_leftparen Actuals t_rightparen {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-     | t_id t_period t_id t_leftparen Actuals t_rightparen {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Call ::= t_id t_leftparen Actuals t_rightparen {:System.out.printf("[reduce %d]",sym.Call);:}
+     | t_id t_period t_id t_leftparen Actuals t_rightparen {:System.out.printf("[reduce %d]",sym.Call);:}
      ;
 
-Actuals ::= ExprPlus {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-        | {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Actuals ::= ExprPlus {:System.out.printf("[reduce %d]",sym.Actuals);:}
+        | {:System.out.printf("[reduce %d]",sym.Actuals);:}
         ; 
 
-Constant ::= t_intconstant {:System.out.printf("[reduce %d]",parser.prod_num++);:} 
-         | t_doubleconstant {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-         | t_stringconstant {:System.out.printf("[reduce %d]",parser.prod_num++);:}
-         | t_boolconstant {:System.out.printf("[reduce %d]",parser.prod_num++);:}
+Constant ::= t_intconstant {:System.out.printf("[reduce %d]",sym.Constant);:} 
+         | t_doubleconstant {:System.out.printf("[reduce %d]",sym.Constant);:}
+         | t_stringconstant {:System.out.printf("[reduce %d]",sym.Constant);:}
+         | t_boolconstant {:System.out.printf("[reduce %d]",sym.Constant);:}
          ;
 
