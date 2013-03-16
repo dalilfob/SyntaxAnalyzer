@@ -60,7 +60,7 @@ start with Prog;
 Prog ::= A {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
      ;
 
-A ::= A Decl {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+A ::= Decl A {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
   | Decl     {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}  
   ;
 
@@ -89,7 +89,7 @@ FunctionDecl ::= Type t_id t_leftparen Formals t_rightparen StmtBlock {:System.o
              | t_void t_id t_leftparen Formals t_rightparen StmtBlock {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
              ;
 
-Formals ::= Formals t_comma Variable {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+Formals ::= Variable t_comma Formals {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
         | Variable {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
         | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:} 
         ;
@@ -105,12 +105,12 @@ Implements ::= t_implements IDs {:System.out.printf("[reduce %d]",CUP$parser$act
            ;
 
 
-IDs ::= IDs t_comma t_id {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+IDs ::= t_id t_comma IDs {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
     | t_id {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
     ;
 
 
-FieldStar ::= FieldStar Field {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+FieldStar ::= Field FieldStar {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           ;
 
@@ -121,7 +121,7 @@ Field ::= VariableDecl {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
 InterfaceDecl ::= t_interface t_id t_leftbrace ProtoStar t_rightbrace {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
               ; 
 
-ProtoStar ::= ProtoStar Prototype {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+ProtoStar ::= Prototype ProtoStar {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           | Prototype {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           ;
@@ -133,11 +133,11 @@ Prototype ::= Type t_id t_leftparen Formals t_rightparen t_semicolon {:System.ou
 StmtBlock ::= t_leftbrace VariableStar StmtStar t_rightbrace {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           ;
 
-VariableStar ::= VariableStar VariableDecl {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+VariableStar ::= VariableDecl VariableStar {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
              | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
              ;
 
-StmtStar ::= StmtStar Stmt {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+StmtStar ::= Stmt StmtStar {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
          | Stmt {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
          | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
          ;
@@ -178,7 +178,7 @@ ReturnStmt ::= t_return ExprQ t_semicolon {:System.out.printf("[reduce %d]",CUP$
 PrintStmt ::= t_println t_leftparen ExprPlus t_rightparen t_semicolon {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           ;
 
-ExprPlus ::= ExprPlus t_comma Expr {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+ExprPlus ::= Expr t_comma ExprPlus {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
          | Expr {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
          ;
 
