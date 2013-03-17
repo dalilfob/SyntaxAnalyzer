@@ -2,6 +2,11 @@
 
 Toy Language Syntax Analyzer (CUP/YACC) 
 
+## Quick Start
+- Clone this
+- ``sh setup.sh``
+- ``sh run.sh``
+
 ## Compile Instructions
 ### Clone this repository
 
@@ -24,7 +29,7 @@ java -jar lib/JFlex.jar toy.flex > dump.no
 java java_cup.Main -nowarn -nosummary -expect 50 toy.cup &> dump.no
 javac Driver.java
 ```
-The redirects to ``dump.no`` are used to filter the warning messages and garbage output to stdout (byproduct of altering the CUP files to print shifting). Feel free to remove them. 
+The redirects to ``dump.no`` are used to filter the warning messages and garbage output from stdout (byproduct of altering the CUP files to print shifting). Feel free to remove them. 
 
 
 ## Run Tests
