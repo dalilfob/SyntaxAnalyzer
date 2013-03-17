@@ -122,7 +122,6 @@ InterfaceDecl ::= t_interface t_id t_leftbrace ProtoStar t_rightbrace {:System.o
               ; 
 
 ProtoStar ::= Prototype ProtoStar {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
-          | Prototype {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           ;
 
@@ -138,7 +137,6 @@ VariableStar ::= VariableDecl VariableStar {:System.out.printf("[reduce %d]",CUP
              ;
 
 StmtStar ::= Stmt StmtStar {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
-         | Stmt {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
          | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
          ;
 
