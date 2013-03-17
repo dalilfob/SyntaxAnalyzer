@@ -16,15 +16,12 @@ parser code
     public int prod_num = 0;
     :};
 
-
 /* Scan with */
 
 scan with
     {:
         return lexer.next_token();
     :};
-
-
 
 /* Terminal Tokens */
 
@@ -40,7 +37,7 @@ terminal    t_rightbracket, t_leftbrace, t_rightbrace, t_boolconstant;
 terminal    t_intconstant, t_doubleconstant, t_stringconstant, t_id;
 
 /* Non Terminals */
-non terminal Prog, A, Decl, VariableDecl, Variable;
+non terminal Prog, A, Decl, VariableDecl, Variable, VariableList;
 non terminal Type, FunctionDecl, Formals, ClassDecl;
 non terminal Extends, Implements, IDs, FieldStar, Field;
 non terminal InterfaceDecl, ProtoStar, Prototype, StmtBlock;
@@ -89,10 +86,13 @@ FunctionDecl ::= Type t_id t_leftparen Formals t_rightparen StmtBlock {:System.o
              | t_void t_id t_leftparen Formals t_rightparen StmtBlock {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
              ;
 
-Formals ::= Formals t_comma Variable {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
-        | Variable {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+Formals ::= VariableList {:System.out.printf("[reduce %d]",CUP$parser$act_num);:} 
         | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:} 
         ;
+
+VariableList ::= Formals t_comma Variable {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+             | Variable {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+             ;
 
 ClassDecl ::= t_class t_id Extends Implements t_leftbrace FieldStar t_rightbrace {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           ;
@@ -105,11 +105,9 @@ Implements ::= t_implements IDs {:System.out.printf("[reduce %d]",CUP$parser$act
            | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
            ;
 
-
 IDs ::= IDs t_comma t_id {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
     | t_id {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
     ;
-
 
 FieldStar ::= FieldStar Field {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
@@ -159,14 +157,11 @@ IfStmt ::= t_if t_leftparen Expr t_rightparen Stmt {:System.out.printf("[reduce 
        | t_if t_leftparen Expr t_rightparen Stmt t_else Stmt {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
        ;
 
-
 WhileStmt ::= t_while t_leftparen Expr t_rightparen Stmt {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           ;
 
-
 ForStmt ::= t_for t_leftparen ExprQ t_semicolon Expr t_semicolon ExprQ t_rightparen Stmt {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
         ;
-
 
 BreakStmt ::= t_break t_semicolon {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
           ;
