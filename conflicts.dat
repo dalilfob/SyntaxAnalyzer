@@ -1,35 +1,8 @@
-Warning : *** Shift/Reduce conflict found in state #67
-  between Lvalue ::= t_id (*)
-  and     Call ::= t_id (*) t_period t_id t_leftparen Actuals t_rightparen
-  under symbol t_period
-  Resolved in favor of shifting.
-
-Warning : *** Shift/Reduce conflict found in state #48
+Warning : *** Shift/Reduce conflict found
+ in state #50
   between VariableStar ::= (*)
   and     Type ::= (*) t_id
   under symbol t_id
-  Resolved in favor of shifting.
-
-Warning : *** Shift/Reduce conflict found in state #50
-  between VariableStar ::= (*)
-  and     Type ::= (*) t_id
-  under symbol t_id
-  Resolved in favor of shifting.
-
-Warning : *** Reduce/Reduce conflict found in state #23
-  between ProtoStar ::= (*)
-  and     ProtoStar ::= Prototype (*)
-  under symbols: {t_rightbrace}
-  Resolved in favor of the second production.
-
-Warning : *** Shift/Reduce conflict found in state #23
-  between ProtoStar ::= (*)
-  under symbol t_rightbrace
-  Resolved in favor of shifting.
-
-Warning : *** Shift/Reduce conflict found in state #23
-  between ProtoStar ::= Prototype (*)
-  under symbol t_rightbrace
   Resolved in favor of shifting.
 
 Warning : *** Shift/Reduce conflict found in state #145
@@ -38,46 +11,24 @@ Warning : *** Shift/Reduce conflict found in state #145
   under symbol t_else
   Resolved in favor of shifting.
 
-Warning : *** Reduce/Reduce conflict found in state #59
-  between StmtStar ::= Stmt (*)
-  and     StmtStar ::= (*)
-  under symbols: {t_rightbrace}
-  Resolved in favor of the first production.
-
-Warning : *** Reduce/Reduce conflict found in state #59
-  between StmtStar ::= Stmt (*)
-  and     ExprQ ::= (*)
-  under symbols: {}
-  Resolved in favor of the first production.
-
-Warning : *** Shift/Reduce conflict found in state #59
-  between StmtStar ::= Stmt (*)
-  under symbol t_rightbrace
+Warning : *** Shift/Reduce conflict found in state #48
+  between VariableStar ::= (*)
+  and     Type ::= (*) t_id
+  under symbol t_id
   Resolved in favor of shifting.
 
-Warning : *** Reduce/Reduce conflict found in state #59
-  between StmtStar ::= (*)
-  and     ExprQ ::= (*)
-  under symbols: {}
-  Resolved in favor of the first production.
-
-Warning : *** Shift/Reduce conflict found in state #59
-  between StmtStar ::= (*)
-  under symbol t_rightbrace
+Warning : *** Shift/Reduce conflict found in state #67
+  between Lvalue ::= t_id (*)
+  and     Call ::= t_id (*) t_period t_id t_leftparen Actuals t_rightparen
+  under symbol t_period
   Resolved in favor of shifting.
 
-Warning : *** Shift/Reduce conflict found in state #59
-  between ExprQ ::= (*)
-  under symbol t_rightbrace
-  Resolved in favor of shifting.
-
-  ------- CUP v0.11a beta 20060608 Parser Generation Summary -------
-  0 errors and 13 warnings
-  46 terminals, 34 non-terminals, and 92 productions declared,
+------- CUP v0.11a beta 20060608 Parser Generation Summary -------
+  0 errors and 4 warnings
+  46 terminals, 34 non-terminals, and 90 productions declared,
   producing 185 unique parse states.
   0 terminals declared but not used.
   0 non-terminals declared but not used.
   0 productions never reduced.
-  13 conflicts detected (50 expected).
-  Code written to "parser.java", and "sym.java".
----------------------------------------------------- (v0.11a beta 20060608)
+  4 conflicts detected (50 expected).
+  ---------------------------------------------------- (v0.11a beta 20060608)
