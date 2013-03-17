@@ -102,6 +102,7 @@ Extends ::= t_extends t_id {:System.out.printf("[reduce %d]",CUP$parser$act_num)
         ;
 
 Implements ::= t_implements IDs {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
+           | {:System.out.printf("[reduce %d]",CUP$parser$act_num);:}
            ;
 
 
