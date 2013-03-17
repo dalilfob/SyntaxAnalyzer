@@ -16,7 +16,10 @@ double distance(int a, int b) {
 
 class Point implements cookie, monster {
 	int y;
-	while (y > 15) {
-		println("Nothing of consequence here");
+
+	void hateYou(string justKidding) {
+		while (y > 15) {
+			println("Nothing of consequence here");
+		}
 	}
 }
