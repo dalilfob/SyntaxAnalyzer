@@ -16,7 +16,7 @@ git clone https://github.com/blazindragon/SyntaxAnalyzer.git
 
 ### Compile via Bash Script (Reccomended)
 
-Works in Bash (UNIX) and Powershell (WINDOWS)
+Works in Bash (UNIX) and Powershell with 'sh' in path (WINDOWS)
 
 ```
 sh setup.sh 
