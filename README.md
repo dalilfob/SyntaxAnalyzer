@@ -2,37 +2,46 @@
 
 Toy Language Syntax Analyzer (CUP/YACC) 
 
-# Compile & Run Instructions
-1. Clone this repository
+## Compile Instructions
+### Clone this repository
+
 ```
 git clone https://github.com/blazindragon/SyntaxAnalyzer.git
 ```
-2. Create Lexer.java via JFlex and JFlex Specification
-```
-java -jar JFlex.jar toy.flex
-```
-3. Create parser.java via CUP and CUP specificatin
-```
-java java_cup.Main -expect 50 -nonterms toy.cup
-```
-4. Test 
-```
-javac ParserDriver.java
-java ParserDriver test1.toy
-```
 
-# Modified CUP Compile
+### Compile via Bash Script (Reccomended)
 
-In order to show shift actions, requires the use of the modified cup files:
+Works in Bash (UNIX) and Powershell (WINDOWS)
 
 ```
-java java_cup.Main -expect 50 -nonterms toy.cup
+sh setup.sh 
 ```
 
-#CUP Compile
+### Compile Manually
 
 ```
-java -jar java-cup-11a.jar -expect 50 -nonterms toy.cup
+java -jar lib/JFlex.jar toy.flex > dump.no
+java java_cup.Main -nowarn -nosummary -expect 50 toy.cup &> dump.no
+javac Driver.java
+```
+The redirects to ``dump.no`` are used to filter the warning messages and garbage output to stdout (byproduct of altering the CUP files to print shifting). Feel free to remove them. 
+
+
+## Run Tests
+
+### Via Script
+
+```
+sh run.sh
+```
+
+### Manually
+
+```
+java Driver tests/test1.toy > results/test1.out
+java Driver tests/test2.toy > results/test2.out
+java Driver tests/test3.toy > results/test3.out
+java Driver tests/test4.toy > results/test4.out
 ```
 
 ## Resources

@@ -1,11 +1,8 @@
 #!/bin/bash
-printf "Generating lexer from toy.flex\n"
-java -jar lib/JFlex.jar toy.flex > dump.no
 
-printf "Generating parser from toy.cup\n"
-java java_cup.Main -nowarn -nosummary -expect 50 toy.cup &> dump.no
+java Driver tests/test1.toy > results/test1.out
+java Driver tests/test2.toy > results/test2.out
+java Driver tests/test3.toy > results/test3.out
+java Driver tests/test4.toy > results/test4.out
 
-printf "Compiling Driver.java\n"
-javac Driver.java
-
-printf "Usage:\n java Driver testfile\n"
+printf "Tests completed...See /results/ directory"
