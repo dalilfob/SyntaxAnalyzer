@@ -11,13 +11,12 @@ double distance(int a, int b) {
 	y = x - 90;
 	x = - 90;
 	y = y % 900;
-	string hello;
-	hello = "hello";
 	return sqrt(a * b);
 }
 
 class Point implements cookie, monster {
-	while (x + y > 15) {
+	int y;
+	while (y > 15) {
 		println("Nothing of consequence here");
 	}
 }
