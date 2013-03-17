@@ -1,0 +1,21 @@
+
+double [shift]
+distance [reduce 11][shift]
+( [shift]
+int [shift]
+a [reduce 10][shift]
+, [reduce 9][shift]
+int [shift]
+b [reduce 10][shift]
+) [reduce 9][reduce 19][reduce 18][shift]
+{ [shift]
+int [shift]
+x [reduce 10][shift]
+; [reduce 9][shift]
+int [reduce 8][shift]
+y [reduce 10][shift]
+; [reduce 9][shift]
+x [reduce 8][shift]
+= Syntax error at character 5 of input
+Couldn't repair and continue parse at character 5 of input
+Exception while parsing
