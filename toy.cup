@@ -46,9 +46,14 @@ non terminal ForStmt, BreakStmt, ReturnStmt, PrintStmt, ExprPlus;
 non terminal Expr, Lvalue, Call, Actuals, Constant, ExprQ;
 
 /* Precedence */
+precedence left t_leftbracket;
+precedence left t_comma;
+precedence right t_assignop;
+precedence left t_period;
 precedence nonassoc t_less, t_lessequal, t_greater, t_greaterequal;
-precedence right t_notequal, t_assignop, t_equal;
-precedence left t_plus, t_minus, t_multiplication, t_division, t_mod;
+precedence left t_multiplication, t_division, t_mod;
+precedence left t_plus, t_minus;
+precedence left t_equal, t_notequal;
 
 /* Start */
 start with Prog;
